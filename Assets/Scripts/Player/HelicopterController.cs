@@ -16,13 +16,16 @@ public class HelicopterController : MonoBehaviour
     [Space]
     [SerializeField] float fEngineStartingTime;
     [SerializeField] float fEngineStoppingTime;
+    [Space]
+    [SerializeField] float fVerticalSpeed;
+    [SerializeField] float fCyclicSpeed;
 
     const float N_ENGINE_RUNNING_STEPS = 32;
     const float F_ENGINE_RUNNING_DELTA = 1.0f / N_ENGINE_RUNNING_STEPS;
 
     float fThrottle;
     float fCollective;
-    float fCycle;
+    float fCyclic;
 
     bool bEngineStatus = false;
     bool bEngineRunning = false;
@@ -38,6 +41,9 @@ public class HelicopterController : MonoBehaviour
         if (bEngineStatus)
         {
             rigidBody.AddForce(trsPlayer.up * Physics2D.gravity.magnitude * fThrottle);
+
+            rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, transform.up * fThrottle * fCollective * fVerticalSpeed, 0.0625f);
+            rigidBody.angularVelocity = Mathf.Lerp(rigidBody.angularVelocity, -fThrottle * fCyclic * fCyclicSpeed, 0.125f);
         }
     }
 
@@ -55,7 +61,8 @@ public class HelicopterController : MonoBehaviour
             }
         }
 
-        // TODO: Movable Controllable
+        fCollective = Input.GetAxis("Vertical");
+        fCyclic = Input.GetAxis("Horizontal");
 
         BladeRotation();
     }
@@ -63,15 +70,14 @@ public class HelicopterController : MonoBehaviour
     IEnumerator StartEngine()
     {
         bEngineRunning = true;
+        bEngineStatus = true;
 
         while (fThrottle < 1.0f)
         {
             fThrottle += F_ENGINE_RUNNING_DELTA;
-            Debug.Log("Engine is starting, throttle: " + fThrottle);
             yield return new WaitForSeconds(fEngineStartingTime / N_ENGINE_RUNNING_STEPS);
         }
-
-        bEngineStatus = true;
+        
         bEngineRunning = false;
     }
     IEnumerator StopEngine()
@@ -81,7 +87,6 @@ public class HelicopterController : MonoBehaviour
         while (fThrottle > 0.0f)
         {
             fThrottle -= F_ENGINE_RUNNING_DELTA;
-            Debug.Log("Engine is stopping, throttle: " + fThrottle);
             yield return new WaitForSeconds(fEngineStoppingTime / N_ENGINE_RUNNING_STEPS);
         }
 
