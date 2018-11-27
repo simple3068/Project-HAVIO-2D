@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using SimpleInputNamespace;
 
 public class HelicopterController : MonoBehaviour
 {
@@ -8,6 +10,10 @@ public class HelicopterController : MonoBehaviour
     [SerializeField] Transform trsPlayer;
     [SerializeField] Transform trsCenterOfMass;
     [SerializeField] Rigidbody2D rigidBody;
+    [Space]
+    [SerializeField] Button btnEngine;
+    [SerializeField] Sprite sprEngineOn;
+    [SerializeField] Sprite sprEngineOff;
     [Space]
     [SerializeField] Transform trsMainBlade;
     [SerializeField] float fMainRotorSpeed;
@@ -18,10 +24,18 @@ public class HelicopterController : MonoBehaviour
     [SerializeField] float fEngineStoppingTime;
     [Space]
     [SerializeField] float fVerticalSpeed;
-    [SerializeField] float fCyclicSpeed;
+    [SerializeField] float fHorizontalSpeed;
+    [SerializeField] float fCyclicAngle;
+    [Space]
+    [Header("Android Option")]
+    [SerializeField] bool bUseJoystick;
+    [SerializeField] Joystick joystick;
+    
 
     const float N_ENGINE_RUNNING_STEPS = 32;
     const float F_ENGINE_RUNNING_DELTA = 1.0f / N_ENGINE_RUNNING_STEPS;
+
+    Vector2 v2ThrottleForce;
 
     float fThrottle;
     float fCollective;
@@ -34,35 +48,57 @@ public class HelicopterController : MonoBehaviour
     void Start()
     {
         rigidBody.centerOfMass = trsCenterOfMass.localPosition;
+
+        btnEngine.onClick.AddListener(delegate
+        {
+            if (bAvailableFlight && !bEngineRunning)
+            {
+                if (!bEngineStatus)
+                {
+                    btnEngine.image.sprite = sprEngineOn;
+                    StartCoroutine("StartEngine");
+                }
+                else
+                {
+                    btnEngine.image.sprite = sprEngineOff;
+                    StartCoroutine("StopEngine");
+                }
+            }
+        });
     }
 
     void FixedUpdate()
     {
         if (bEngineStatus)
         {
-            rigidBody.AddForce(trsPlayer.up * Physics2D.gravity.magnitude * fThrottle);
+            // Calculate and Apply Throttle Force
+            v2ThrottleForce = trsPlayer.up * Physics2D.gravity.magnitude * fThrottle;
+            if (Vector3.Dot(Vector3.up, trsPlayer.up) > 0.0f)
+                rigidBody.AddForce(v2ThrottleForce / ((Vector3.Dot(Vector3.up, trsPlayer.up) + 1.0f) / 2.0f));
 
-            rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, transform.up * fThrottle * fCollective * fVerticalSpeed, 0.0625f);
-            rigidBody.angularVelocity = Mathf.Lerp(rigidBody.angularVelocity, -fThrottle * fCyclic * fCyclicSpeed, 0.125f);
+            // Calculate and Apply Net Velocity
+            Vector3 v3Vel = new Vector3(
+                fThrottle * fCyclic * fHorizontalSpeed,
+                fThrottle * fCollective * fVerticalSpeed
+            );
+
+            rigidBody.velocity = Vector3.Lerp(rigidBody.velocity, v3Vel, 0.0625f);
+            rigidBody.rotation = Mathf.Lerp(rigidBody.rotation, -fThrottle * fCyclic * fCyclicAngle, 0.03125f);
         }
     }
 
     void Update()
     {
-        if (bAvailableFlight && !bEngineRunning && Input.GetKeyDown(KeyCode.LeftShift))
+        if (bUseJoystick)
         {
-            if (!bEngineStatus)
-            {
-                StartCoroutine("StartEngine");
-            }
-            else
-            {
-                StartCoroutine("StopEngine");
-            }
+            fCollective = joystick.yAxis.value;
+            fCyclic = joystick.xAxis.value;
         }
-
-        fCollective = Input.GetAxis("Vertical");
-        fCyclic = Input.GetAxis("Horizontal");
+        else
+        {
+            fCollective = Input.GetAxis("Vertical");
+            fCyclic = Input.GetAxis("Horizontal");
+        }
 
         BladeRotation();
     }
@@ -80,6 +116,7 @@ public class HelicopterController : MonoBehaviour
         
         bEngineRunning = false;
     }
+
     IEnumerator StopEngine()
     {
         bEngineRunning = true;
@@ -98,5 +135,13 @@ public class HelicopterController : MonoBehaviour
     {
         trsMainBlade.Rotate(0.0f, fThrottle * fMainRotorSpeed, 0.0f);
         trsTailBlade.Rotate(0.0f, 0.0f, -fThrottle * fTailRotorSpeed);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (bEngineStatus)
+            StartCoroutine("StopEngine");
+        
+        bAvailableFlight = false;
     }
 }
