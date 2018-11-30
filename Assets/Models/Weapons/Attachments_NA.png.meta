@@ -1,0 +1,307 @@
+fileFormatVersion: 2
+guid: 249fa493cd4380b47acbdaa5acf49cf1
+timeCreated: 1543555666
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Attachments_NA_LAU-131
+    21300002: Attachments_NA_M134
+    21300004: Attachments_NA_TOW x2
+    21300006: Attachments_NA_M261
+    21300008: Attachments_NA_GAU-19
+    21300010: Attachments_NA_TOW x4
+    21300012: Attachments_NA_70mm_M229
+    21300014: Attachments_NA_M129
+    21300016: Attachments_NA_40mm Grenade
+    21300018: Attachments_NA_BGM-71 TOW
+    21300020: Attachments_NA_70mm M247 APKWC
+    21300022: Attachments_NA_Hellfire x2
+    21300024: Attachments_NA_Hellfire x4
+    21300026: Attachments_NA_AGM-114 Hellfire
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 30
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Attachments_NA_LAU-131
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 34
+        height: 8
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_M134
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 70
+        width: 31
+        height: 10
+      alignment: 9
+      pivot: {x: 0.29, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_TOW x2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 72
+        width: 40
+        height: 8
+      alignment: 9
+      pivot: {x: 0.425, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_M261
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 61
+        width: 36
+        height: 10
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_GAU-19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 59
+        width: 42
+        height: 10
+      alignment: 9
+      pivot: {x: 0.25, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_TOW x4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 56
+        width: 40
+        height: 15
+      alignment: 9
+      pivot: {x: 0.425, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_70mm_M229
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 38
+        height: 8
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_M129
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 48
+        width: 32
+        height: 10
+      alignment: 9
+      pivot: {x: 0.23, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_40mm Grenade
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 51
+        width: 7
+        height: 4
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_BGM-71 TOW
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 44
+        width: 33
+        height: 11
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_70mm M247 APKWC
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 42
+        width: 33
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_Hellfire x2
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 39
+        width: 20
+        height: 4
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_Hellfire x4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 26
+        width: 20
+        height: 12
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attachments_NA_AGM-114 Hellfire
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 16
+        width: 37
+        height: 9
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -15,6 +15,8 @@ public class HelicopterController : MonoBehaviour
     [SerializeField] Sprite sprEngineOn;
     [SerializeField] Sprite sprEngineOff;
     [Space]
+    [SerializeField] Button btnTurn;
+    [Space]
     [SerializeField] Transform trsMainBlade;
     [SerializeField] float fMainRotorSpeed;
     [SerializeField] Transform trsTailBlade;
@@ -27,10 +29,14 @@ public class HelicopterController : MonoBehaviour
     [SerializeField] float fHorizontalSpeed;
     [SerializeField] float fCyclicAngle;
     [Space]
+    [Header("Pod Weapon System")]
+    [SerializeField] PodSystemController pscPodWeapon;
+    [Space]
     [Header("Android Option")]
     [SerializeField] bool bUseJoystick;
     [SerializeField] Joystick joystick;
-    
+
+    string[] strIgnoreTag = { "Bullet" };
 
     const float N_ENGINE_RUNNING_STEPS = 32;
     const float F_ENGINE_RUNNING_DELTA = 1.0f / N_ENGINE_RUNNING_STEPS;
@@ -44,6 +50,8 @@ public class HelicopterController : MonoBehaviour
     bool bEngineStatus = false;
     bool bEngineRunning = false;
     bool bAvailableFlight = true;
+
+    bool bHeadingRight = true;
 
     void Start()
     {
@@ -62,6 +70,22 @@ public class HelicopterController : MonoBehaviour
                 {
                     btnEngine.image.sprite = sprEngineOff;
                     StartCoroutine("StopEngine");
+                }
+            }
+        });
+        btnTurn.onClick.AddListener(delegate
+        {
+            if (bAvailableFlight && bEngineStatus)
+            {
+                if (bHeadingRight)
+                {
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+                    bHeadingRight = false;
+                }
+                else
+                {
+                    transform.Rotate(0.0f, 180.0f, 0.0f);
+                    bHeadingRight = true;
                 }
             }
         });
@@ -101,6 +125,14 @@ public class HelicopterController : MonoBehaviour
         }
 
         BladeRotation();
+
+        if (bEngineStatus)
+        {
+            if (Input.GetKey(KeyCode.Space))
+                pscPodWeapon.Fire();
+            if (Input.GetKey(KeyCode.R))
+                pscPodWeapon.Reload();
+        }
     }
 
     IEnumerator StartEngine()
@@ -139,9 +171,15 @@ public class HelicopterController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        foreach (string it in strIgnoreTag)
+        {
+            if (other.CompareTag(it)) return;
+        }
+
         if (bEngineStatus)
             StartCoroutine("StopEngine");
-        
+
+        btnEngine.image.sprite = sprEngineOff;
         bAvailableFlight = false;
     }
 }

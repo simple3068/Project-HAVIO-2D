@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Main Rotor
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,10 @@ TagManager:
     locked: 0
   - name: Main Blade
     uniqueID: 1329125539
+    locked: 0
+  - name: Firement
+    uniqueID: 1036577683
+    locked: 0
+  - name: Attachments
+    uniqueID: 3946695719
     locked: 0
