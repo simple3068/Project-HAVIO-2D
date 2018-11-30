@@ -126,7 +126,7 @@ public class HelicopterController : MonoBehaviour
 
         BladeRotation();
 
-        if (bEngineStatus)
+        if (bEngineStatus && pscPodWeapon)
         {
             if (Input.GetKey(KeyCode.Space))
                 pscPodWeapon.Fire();

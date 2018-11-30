@@ -20,7 +20,8 @@ public class BulletBehaviour : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         rigidBody.velocity = transform.right * fSpeed;
-        spriteRenderer.sprite = sprBulletTrace[Random.Range(0, sprBulletTrace.Length)];
+        if (sprBulletTrace.Length > 0)
+            spriteRenderer.sprite = sprBulletTrace[Random.Range(0, sprBulletTrace.Length)];
 
         Destroy(gameObject, fAutoDetonateTime);
     }

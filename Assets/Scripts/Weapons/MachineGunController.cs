@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class M261Controller : PodSystemController
+public class MachineGunController : PodSystemController
 {
-    [SerializeField] GameObject objRocket;
+    public string strName;
+    [SerializeField] GameObject objBullet;
     [SerializeField] Transform trsFirePos;
     [Space]
-    [SerializeField] int nRemainedRocket;
-    [SerializeField] int nPodCapacity = 19;
-    [SerializeField] int nTotalRocket;
+    [SerializeField] MuzzleFlashController muzzleFlashController;
+    [Space]
+    [SerializeField] int nRemainedRound;
+    [SerializeField] int nMagazineCapacity = 25;
+    [SerializeField] int nTotalRound;
     [Space]
     [SerializeField] float fFireInterval;
     [SerializeField] float fReloadTime;
 
     bool bActivating = false;
 
-	void Start ()
+    void Start()
     {
-        nRemainedRocket = nPodCapacity;
+        nRemainedRound = nMagazineCapacity;
     }
-	
-	void Update ()
+
+    void Update()
     {
         if (!bActivating)
         {
@@ -34,7 +37,7 @@ public class M261Controller : PodSystemController
                 Reload();
             }
         }
-	}
+    }
 
     public override void Fire()
     {
@@ -50,12 +53,14 @@ public class M261Controller : PodSystemController
 
     IEnumerator _Fire()
     {
-        if (nRemainedRocket > 0)
+        if (nRemainedRound > 0)
         {
             bActivating = true;
 
-            Instantiate(objRocket, trsFirePos.position, trsFirePos.rotation, null);
-            nRemainedRocket--;
+            muzzleFlashController.FlashOneShot(fFireInterval);
+
+            Instantiate(objBullet, trsFirePos.position, trsFirePos.rotation, null);
+            nRemainedRound--;
 
             yield return new WaitForSeconds(fFireInterval);
 
@@ -69,27 +74,27 @@ public class M261Controller : PodSystemController
 
     IEnumerator _Reload()
     {
-        int nDelta = nPodCapacity - nRemainedRocket;
+        int nDelta = nMagazineCapacity - nRemainedRound;
 
-        if (nTotalRocket >= nDelta)
+        if (nTotalRound >= nDelta)
         {
             bActivating = true;
 
             yield return new WaitForSeconds(fReloadTime);
 
-            nRemainedRocket += nDelta;
-            nTotalRocket -= nDelta;
+            nRemainedRound += nDelta;
+            nTotalRound -= nDelta;
 
             bActivating = false;
         }
-        else if (nTotalRocket > 0)
+        else if (nTotalRound > 0)
         {
             bActivating = true;
 
             yield return new WaitForSeconds(fReloadTime);
 
-            nRemainedRocket += nTotalRocket;
-            nTotalRocket = 0;
+            nRemainedRound += nTotalRound;
+            nTotalRound = 0;
 
             bActivating = false;
         }

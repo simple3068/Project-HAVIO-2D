@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4449555539618154}
   - component: {fileID: 212008717278211256}
-  - component: {fileID: 114320200754292270}
+  - component: {fileID: 114421407958180972}
   m_Layer: 0
   m_Name: M261 Rocket Pod
   m_TagString: Player
@@ -50,7 +50,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1708388585044432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.005, y: -0.647, z: 0}
+  m_LocalPosition: {x: 4.860423, y: -0.6267385, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4657248823000882}
@@ -70,7 +70,7 @@ Transform:
   m_Father: {fileID: 4449555539618154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114320200754292270
+--- !u!114 &114421407958180972
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -78,9 +78,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1708388585044432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce4d3a65296afb448795e0d08d8d6ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a052ceb5283c7e499bf02040738bfb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strName: M261
   objRocket: {fileID: 1037313849655572, guid: 621e239a428469346b1ece3ab94b3c37, type: 2}
   trsFirePos: {fileID: 4657248823000882}
   nRemainedRocket: 0
