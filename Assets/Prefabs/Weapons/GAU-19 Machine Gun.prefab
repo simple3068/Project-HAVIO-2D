@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836756103991086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.633, y: -0.62, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4451456027355356}
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cf01e573151c54daa1e3c43bac7817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprButtonIcon: {fileID: 21300000, guid: 8e7c979690132cf41980a7d2ad83854f, type: 3}
   strName: GAU-19
   objBullet: {fileID: 1421006576782530, guid: 0df16aa5613bf224ab7ffc2c04761d8b, type: 2}
   trsFirePos: {fileID: 4451456027355356}
@@ -139,6 +140,10 @@ MonoBehaviour:
   nTotalRound: 50
   fFireInterval: 0.35
   fReloadTime: 3
+  acFire: {fileID: 8300000, guid: acdfc39652b4cbf4289cca99ab3429bb, type: 3}
+  acReloadStart: {fileID: 8300000, guid: bf276359f070d074aa585ea8293a95b8, type: 3}
+  acReloadEnd: {fileID: 8300000, guid: 97fedba781a94ce4c9842e3c04abad44, type: 3}
+  bLoopable: 0
 --- !u!212 &212446883148168618
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a052ceb5283c7e499bf02040738bfb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprButtonIcon: {fileID: 21300000, guid: 96167d6fb4df06e41b7df512c19cb4c3, type: 3}
   strName: M261
   objRocket: {fileID: 1037313849655572, guid: 621e239a428469346b1ece3ab94b3c37, type: 2}
   trsFirePos: {fileID: 4657248823000882}

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MachineGunController : PodSystemController
 {
-    public string strName;
+    [Space]
+    [Header("Machine Gun Controller")]
     [SerializeField] GameObject objBullet;
     [SerializeField] Transform trsFirePos;
     [Space]
@@ -15,12 +16,24 @@ public class MachineGunController : PodSystemController
     [SerializeField] int nTotalRound;
     [Space]
     [SerializeField] float fFireInterval;
-    [SerializeField] float fReloadTime;
+    [Space]
+    [SerializeField] AudioClip acFire;
+    [SerializeField] AudioClip acReloadStart;
+    [SerializeField] AudioClip acReloadEnd;
+    [SerializeField] bool bLoopable = true;
+
+    AudioSource asFire;
+    AudioSource asReload;
 
     bool bActivating = false;
 
     void Start()
     {
+        asFire = gameObject.AddComponent<AudioSource>();
+        asReload = gameObject.AddComponent<AudioSource>();
+
+        asFire.clip = acFire;
+
         nRemainedRound = nMagazineCapacity;
     }
 
@@ -32,6 +45,11 @@ public class MachineGunController : PodSystemController
             {
                 Fire();
             }
+            else
+            {
+                asFire.Stop();
+            }
+
             if (Input.GetKey(KeyCode.R))
             {
                 Reload();
@@ -47,7 +65,7 @@ public class MachineGunController : PodSystemController
 
     public override void Reload()
     {
-        if (!!bActivating)
+        if (!bActivating)
             StartCoroutine("_Reload");
     }
 
@@ -62,7 +80,21 @@ public class MachineGunController : PodSystemController
             Instantiate(objBullet, trsFirePos.position, trsFirePos.rotation, null);
             nRemainedRound--;
 
+            if (bLoopable)
+            {
+                if (!asFire.isPlaying)
+                {
+                    asFire.Play();
+                }
+            }
+            else
+            {
+                asFire.time = Random.Range(0, 3) * acFire.length / 3.0f;
+                asFire.Play();
+            }    
             yield return new WaitForSeconds(fFireInterval);
+            if (!bLoopable)
+                asFire.Stop();
 
             bActivating = false;
         }
@@ -76,27 +108,35 @@ public class MachineGunController : PodSystemController
     {
         int nDelta = nMagazineCapacity - nRemainedRound;
 
+        asFire.Stop();
+
         if (nTotalRound >= nDelta)
         {
-            bActivating = true;
+            bReloading = bActivating = true;
 
+            asReload.PlayOneShot(acReloadStart);
             yield return new WaitForSeconds(fReloadTime);
+            asReload.Stop();
+            asReload.PlayOneShot(acReloadEnd);
 
             nRemainedRound += nDelta;
             nTotalRound -= nDelta;
 
-            bActivating = false;
+            bReloading = bActivating = false;
         }
         else if (nTotalRound > 0)
         {
-            bActivating = true;
-
+            bReloading = bActivating = true;
+            
+            asReload.PlayOneShot(acReloadStart);
             yield return new WaitForSeconds(fReloadTime);
+            asReload.Stop();
+            asReload.PlayOneShot(acReloadEnd);
 
             nRemainedRound += nTotalRound;
             nTotalRound = 0;
 
-            bActivating = false;
+            bReloading = bActivating = false;
         }
     }
 }

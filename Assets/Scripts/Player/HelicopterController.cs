@@ -17,6 +17,11 @@ public class HelicopterController : MonoBehaviour
     [Space]
     [SerializeField] Button btnTurn;
     [Space]
+    [SerializeField] EnhancedButton ebtnFire;
+    [Space]
+    [SerializeField] Button btnReload;
+    [SerializeField] Image imgReloadBar;
+    [Space]
     [SerializeField] Transform trsMainBlade;
     [SerializeField] float fMainRotorSpeed;
     [SerializeField] Transform trsTailBlade;
@@ -53,6 +58,8 @@ public class HelicopterController : MonoBehaviour
 
     bool bHeadingRight = true;
 
+    bool bReloadingProgess = false;
+
     void Start()
     {
         rigidBody.centerOfMass = trsCenterOfMass.localPosition;
@@ -87,6 +94,13 @@ public class HelicopterController : MonoBehaviour
                     transform.Rotate(0.0f, 180.0f, 0.0f);
                     bHeadingRight = true;
                 }
+            }
+        });
+        btnReload.onClick.AddListener(delegate
+        {
+            if (bEngineStatus && pscPodWeapon)
+            {
+                pscPodWeapon.Reload();
             }
         });
     }
@@ -128,10 +142,19 @@ public class HelicopterController : MonoBehaviour
 
         if (bEngineStatus && pscPodWeapon)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space) || ebtnFire.isPressed)
                 pscPodWeapon.Fire();
             if (Input.GetKey(KeyCode.R))
                 pscPodWeapon.Reload();
+        }
+
+        if (pscPodWeapon.bReloading)
+        {
+            if (!bReloadingProgess)
+            {
+                bReloadingProgess = true;
+                StartCoroutine("Reloading");
+            }
         }
     }
 
@@ -181,5 +204,23 @@ public class HelicopterController : MonoBehaviour
 
         btnEngine.image.sprite = sprEngineOff;
         bAvailableFlight = false;
+    }
+
+    IEnumerator Reloading()
+    {
+        float startTime = Time.time;
+
+        imgReloadBar.fillAmount = 0.0f;
+        imgReloadBar.GetComponent<Image>().color = new Color32(248, 84, 84, 255);
+
+        while (Time.time - startTime < pscPodWeapon.fReloadTime)
+        {
+            imgReloadBar.fillAmount = (Time.time - startTime) / pscPodWeapon.fReloadTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        imgReloadBar.fillAmount = 1.0f;
+        bReloadingProgess = false;
+        imgReloadBar.GetComponent<Image>().color = new Color32(186, 236, 186, 255);
     }
 }

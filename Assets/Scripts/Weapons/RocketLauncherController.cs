@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RocketLauncherController : PodSystemController
 {
-    public string strName;
+    [Space]
+    [Header("Rocket Launcher Controller")]
     [SerializeField] GameObject objRocket;
     [SerializeField] Transform trsFirePos;
     [Space]

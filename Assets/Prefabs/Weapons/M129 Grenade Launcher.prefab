@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75cf01e573151c54daa1e3c43bac7817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprButtonIcon: {fileID: 21300000, guid: b03d94c49e6834843a77d27ef6d7b283, type: 3}
   strName: M129
   objBullet: {fileID: 1359902160916134, guid: 09b64005158ec7845b554c66f75871a8, type: 2}
   trsFirePos: {fileID: 4077374719738284}
