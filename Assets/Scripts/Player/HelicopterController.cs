@@ -223,4 +223,10 @@ public class HelicopterController : MonoBehaviour
         bReloadingProgess = false;
         imgReloadBar.GetComponent<Image>().color = new Color32(186, 236, 186, 255);
     }
+
+    /* 테스트용 */
+    public PodSystemController dbg_PodSystemController {
+        get { return pscPodWeapon; }
+        set { pscPodWeapon = value; }
+    }
 }

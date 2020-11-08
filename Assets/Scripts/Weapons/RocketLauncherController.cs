@@ -14,7 +14,7 @@ public class RocketLauncherController : PodSystemController
     [SerializeField] int nTotalRocket;
     [Space]
     [SerializeField] float fFireInterval;
-    [SerializeField] float fReloadTime;
+    //[SerializeField] new float fReloadTime;
 
     bool bActivating = false;
 

@@ -65,7 +65,7 @@ public class MachineGunController : PodSystemController
 
     public override void Reload()
     {
-        if (!bActivating)
+        if (!bActivating && nRemainedRound != nMagazineCapacity)
             StartCoroutine("_Reload");
     }
 
@@ -138,5 +138,18 @@ public class MachineGunController : PodSystemController
 
             bReloading = bActivating = false;
         }
+    }
+
+    /* 테스트 */
+
+    public int dbg_nRemainedRound
+    {
+        get { return nRemainedRound; }
+        set { nRemainedRound = value; }
+    }
+    public int dbg_nTotalRound
+    {
+        get { return nTotalRound; }
+        set { nTotalRound = value; }
     }
 }
